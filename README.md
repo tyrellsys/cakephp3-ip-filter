@@ -25,3 +25,8 @@ Controller::initialize
             ]);
 ...
 ```
+
+## Method
+
+- `bool check(string $ip = null)` - returns compare `whitelist`.
+- `void checkOrFail(string $ip = null)` - throws \Cake\Http\Exception\ForbiddenException when bad ip address.
