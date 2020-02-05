@@ -30,10 +30,9 @@ class IpFilterComponent extends Component
     {
         $checker = new Check();
         if (is_null($ip)) {
-            $oTrustProxy = $this->request->trustProxy;
-            $this->request->trustProxy = filter_var($this->getConfig('trustProxy', true), FILTER_VALIDATE_BOOLEAN);
-            $ip = $this->request->clientIP();
-            $this->request->trustProxy = $oTrustProxy;
+            $request = clone $this->request;
+            $request->trustProxy = filter_var($this->getConfig('trustProxy', true), FILTER_VALIDATE_BOOLEAN);
+            $ip = $request->clientIP();
         }
 
         $whitelist = $this->getConfig('whitelist');
