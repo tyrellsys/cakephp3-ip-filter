@@ -21,6 +21,4 @@ unset($findRoot);
 
 require $root . '/vendor/autoload.php';
 
-require $root . '/config/bootstrap.php';
-
 $_SERVER['PHP_SELF'] = '/';

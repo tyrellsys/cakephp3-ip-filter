@@ -1,15 +1,15 @@
     
 {
     "name": "tyrellsys/cakephp3-ip-filter",
-    "description": "restrict access by ip address for CakePHP3",
+    "description": "restrict access by ip address for CakePHP4",
     "type": "cakephp-plugin",
     "require": {
-        "php": ">=5.6",
-        "cakephp/cakephp": "~3.6",
+        "php": ">=7.2",
+        "cakephp/cakephp": "^4.0",
         "jalle19/php-whitelist-check": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.7|^6.0"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {

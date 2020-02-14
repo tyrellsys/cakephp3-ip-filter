@@ -30,7 +30,7 @@ class IpFilterComponent extends Component
     {
         $checker = new Check();
         if (is_null($ip)) {
-            $request = clone $this->request;
+            $request = clone $this->getController()->getRequest();
             $request->trustProxy = filter_var($this->getConfig('trustProxy', true), FILTER_VALIDATE_BOOLEAN);
             $ip = $request->clientIP();
         }
