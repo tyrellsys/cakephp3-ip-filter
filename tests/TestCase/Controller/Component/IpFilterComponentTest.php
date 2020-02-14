@@ -27,7 +27,7 @@ class IpFilterComponentTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->_oSERVER = $_SERVER;
@@ -53,7 +53,7 @@ class IpFilterComponentTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
@@ -121,11 +121,11 @@ class IpFilterComponentTest extends TestCase
 
     /**
      * test checkOrFail method
-     * @expectedException \Cake\Http\Exception\ForbiddenException
      * @return void
      */
      public function testCheckOrFail()
      {
+         $this->expectException(\Cake\Http\Exception\ForbiddenException::class);
          $this->Controller->IpFilter->checkOrFail('127.0.0.1');
      }
 }
