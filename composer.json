@@ -20,6 +20,9 @@
         "xrstf/ip-utils": "*"
     },
     "autoload": {
+        "psr-0": {
+            "IpUtils\\": "lib/"
+        },
         "psr-4": {
             "Tyrellsys\\CakePHP3IpFilter\\": "src"
         }
