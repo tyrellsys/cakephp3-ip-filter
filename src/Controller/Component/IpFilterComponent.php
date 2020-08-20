@@ -39,7 +39,7 @@ class IpFilterComponent extends Component
             $whitelist = explode(",", $whitelist);
         }
 
-        $ipset = new IpSet($whitelist);
+        $ipset = new IPSet($whitelist);
 
         return $ipset->match($ip);
     }
