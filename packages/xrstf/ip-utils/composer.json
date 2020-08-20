@@ -1,5 +1,6 @@
 {
     "name": "xrstf/ip-utils",
+    "version": "v1.1.0",
     "description": "small library to deal with IPv4 & IPv6 addresses and subnets",
     "keywords": [
         "ip",
