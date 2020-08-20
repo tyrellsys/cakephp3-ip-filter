@@ -1,4 +1,3 @@
-    
 {
     "name": "tyrellsys/cakephp3-ip-filter",
     "description": "restrict access by ip address for CakePHP4",
@@ -6,7 +5,7 @@
     "require": {
         "php": ">=7.2",
         "cakephp/cakephp": "^4.0",
-        "jalle19/php-whitelist-check": "^1.0"
+        "wikimedia/ip-set": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5"
