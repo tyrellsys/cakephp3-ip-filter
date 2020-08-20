@@ -30,6 +30,5 @@
             "Tyrellsys\\CakePHP3IpFilter\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
