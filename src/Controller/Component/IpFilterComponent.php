@@ -4,7 +4,7 @@ namespace TyrellSys\CakePHP3IpFilter\Controller\Component;
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\Http\Exception\ForbiddenException;
-use Whitelist\Check;
+use Wikimedia\IPSet;
 
 /**
  * IpFilter component
@@ -28,7 +28,6 @@ class IpFilterComponent extends Component
      */
     public function check($ip = null)
     {
-        $checker = new Check();
         if (is_null($ip)) {
             $request = clone $this->getController()->getRequest();
             $request->trustProxy = filter_var($this->getConfig('trustProxy', true), FILTER_VALIDATE_BOOLEAN);
@@ -40,9 +39,9 @@ class IpFilterComponent extends Component
             $whitelist = explode(",", $whitelist);
         }
 
-        $checker->whitelist($whitelist);
+        $ipset = new IpSet($whitelist);
 
-        return $checker->check($ip);
+        return $ipset->match($ip);
     }
 
     /**
