@@ -1,5 +1,5 @@
 <?php
-namespace TyrellSys\CakePHP3IpFilter\Controller\Component;
+namespace Tyrellsys\CakePHP3IpFilter\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
