@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  testsuite:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        php-version: ['7.2', '7.4', '8.0']
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: mbstring, intl
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('composer.json') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Composer Install
+      run: composer install
+
+    - name: Run PHPUnit
+      run: vendor/bin/phpunit
