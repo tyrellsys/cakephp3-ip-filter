@@ -33,7 +33,7 @@ class IpFilterComponentTest extends TestCase
         $this->_oSERVER = $_SERVER;
 
         $controller = $this->getMockBuilder('Cake\Controller\Controller')
-            ->setMethods(['redirect'])
+            ->onlyMethods(['redirect'])
             ->setConstructorArgs([new ServerRequest(), new Response()])
             ->getMock();
 
@@ -69,7 +69,7 @@ class IpFilterComponentTest extends TestCase
      *
      * @return array
      */
-    public function provideData()
+    public static function provideData()
     {
         return [
             ['192.168.0.1', true],
