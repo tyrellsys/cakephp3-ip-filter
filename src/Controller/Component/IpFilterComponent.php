@@ -17,7 +17,7 @@ class IpFilterComponent extends Component
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'trustProxy' => true,
         'whitelist' => ''
     ];
