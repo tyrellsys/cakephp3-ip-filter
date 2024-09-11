@@ -19,6 +19,7 @@ $findRoot = function ($root) {
 $root = $findRoot(__FILE__);
 unset($findRoot);
 
+require_once $root . '/vendor/cakephp/cakephp/tests/bootstrap.php';
 
 require $root . '/vendor/autoload.php';
 
