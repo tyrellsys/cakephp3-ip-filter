@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TyrellSys\CakePHP3IpFilter\Controller\Component;
+namespace Tyrellsys\CakePHP3IpFilter\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Http\Exception\ForbiddenException;
