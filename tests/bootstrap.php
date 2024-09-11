@@ -19,7 +19,6 @@ $findRoot = function ($root) {
 $root = $findRoot(__FILE__);
 unset($findRoot);
 
-require_once 'vendor/cakephp/cakephp/src/basics.php';
 
 require $root . '/vendor/autoload.php';
 
