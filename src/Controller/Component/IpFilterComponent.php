@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace TyrellSys\CakePHP3IpFilter\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
 use Cake\Http\Exception\ForbiddenException;
 use Wikimedia\IPSet;
 
@@ -11,7 +12,6 @@ use Wikimedia\IPSet;
  */
 class IpFilterComponent extends Component
 {
-
     /**
      * Default configuration.
      *
@@ -19,14 +19,14 @@ class IpFilterComponent extends Component
      */
     protected array $_defaultConfig = [
         'trustProxy' => true,
-        'whitelist' => ''
+        'whitelist' => '',
     ];
 
     /**
-     * @param null|string $ip ip address
+     * @param string|null $ip ip address
      * @return bool
      */
-    public function check($ip = null)
+    public function check(?string $ip = null)
     {
         if (is_null($ip)) {
             $request = clone $this->getController()->getRequest();
@@ -36,7 +36,7 @@ class IpFilterComponent extends Component
 
         $whitelist = $this->getConfig('whitelist');
         if (!is_array($whitelist)) {
-            $whitelist = explode(",", $whitelist);
+            $whitelist = explode(',', $whitelist);
         }
 
         $ipset = new IPSet($whitelist);
@@ -45,11 +45,11 @@ class IpFilterComponent extends Component
     }
 
     /**
-     * @param null|string $ip ip address
+     * @param string|null $ip ip address
      * @return void
-     * @throws ForbiddenException
+     * @throws \Cake\Http\Exception\ForbiddenException
      */
-    public function checkOrFail($ip = null)
+    public function checkOrFail(?string $ip = null)
     {
         if (!$this->check($ip)) {
             throw new ForbiddenException($ip);
