@@ -1,5 +1,5 @@
 # cakephp3-ip-filter
-restrict access by ip address for CakePHP4 Component
+restrict access by ip address for CakePHP5 Component
 
 ## Installation
 
