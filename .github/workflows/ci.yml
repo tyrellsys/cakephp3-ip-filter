@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push
+
+permissions:
+  contents: read
+
+jobs:
+  testsuite:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Service
+      run: |
+        sudo service mysql start
+        mysql -h 127.0.0.1 -u root -proot -e 'CREATE DATABASE cakephp;'
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+        extensions: mbstring, intl, apcu, sqlite, pdo_sqlite, pdo_mysql
+        ini-values: apc.enable_cli = 1
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run:  echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+
+    - name: composer install
+      run: |
+        composer install
+
+    - name: Run PHPUnit
+      run: |
+        export DB_URL='mysql://root:root@127.0.0.1/cakephp'
+        vendor/bin/phpunit
+
+  coding-standard:
+    if: false
+    name: Coding Standard & Static Analysis
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+        extensions: mbstring, intl, apcu, sqlite, pdo_sqlite, pdo_mysql
+        ini-values: apc.enable_cli = 1
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run:  echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+
+    - name: composer install
+      run: |
+        composer install
+
+    - name: Run PHP CodeSniffer
+      run: ./vendor/bin/phpcs --colors -p
+
+    - name: Run phpstan
+      if: success() || failure()
+      run: ./vendor/bin/phpstan analyze
